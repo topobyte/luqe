@@ -75,6 +75,18 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	}
 
 	@Override
+	public void setLong(int position, long value) throws QueryException
+	{
+		logger.debug(String.format("setInt: pos: %d, value: %d", position,
+				value));
+		try {
+			statement.setLong(position, value);
+		} catch (SQLException e) {
+			throw new QueryException(e);
+		}
+	}
+
+	@Override
 	public void setDouble(int position, double value) throws QueryException
 	{
 		logger.debug(String.format("setDouble: pos: %d, value: %f", position,

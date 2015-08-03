@@ -75,6 +75,13 @@ public class AndroidPreparedStatement implements IPreparedStatement
 	}
 
 	@Override
+	public void setLong(int position, long value) throws QueryException
+	{
+		ensureSize(position);
+		arguments.set(position - 1, "" + value);
+	}
+
+	@Override
 	public void setDouble(int position, double value) throws QueryException
 	{
 		ensureSize(position);

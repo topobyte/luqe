@@ -24,6 +24,8 @@ public interface IPreparedStatement
 
 	public void setInt(int position, int value) throws QueryException;
 
+	public void setLong(int position, long value) throws QueryException;
+
 	public void setDouble(int position, double value) throws QueryException;
 
 	public void setString(int position, String value) throws QueryException;
