@@ -63,6 +63,12 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	}
 
 	@Override
+	public void execute() throws QueryException
+	{
+		executeQuery();
+	}
+
+	@Override
 	public void setInt(int position, int value) throws QueryException
 	{
 		logger.debug(String.format("setInt: pos: %d, value: %d", position,

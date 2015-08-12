@@ -22,6 +22,8 @@ public interface IPreparedStatement
 
 	public IResultSet executeQuery() throws QueryException;
 
+	public void execute() throws QueryException;
+
 	public void setInt(int position, int value) throws QueryException;
 
 	public void setLong(int position, long value) throws QueryException;

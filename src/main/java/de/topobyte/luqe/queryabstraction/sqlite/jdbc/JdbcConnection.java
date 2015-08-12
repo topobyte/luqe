@@ -53,4 +53,11 @@ public class JdbcConnection implements IConnection
 		}
 	}
 
+	@Override
+	public void execute(String sql) throws QueryException
+	{
+		IPreparedStatement statement = prepareStatement(sql);
+		statement.executeQuery();
+	}
+
 }

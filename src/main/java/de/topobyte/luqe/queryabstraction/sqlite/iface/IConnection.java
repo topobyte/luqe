@@ -20,6 +20,9 @@ package de.topobyte.luqe.queryabstraction.sqlite.iface;
 public interface IConnection
 {
 
-	public IPreparedStatement prepareStatement(String sql) throws QueryException;
+	public IPreparedStatement prepareStatement(String sql)
+			throws QueryException;
+
+	public void execute(String sql) throws QueryException;
 
 }

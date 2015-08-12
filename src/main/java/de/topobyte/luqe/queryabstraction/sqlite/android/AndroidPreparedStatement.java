@@ -57,6 +57,26 @@ public class AndroidPreparedStatement implements IPreparedStatement
 		}
 	}
 
+	@Override
+	public void execute() throws QueryException
+	{
+		String[] array = null;
+		if (arrayArguments != null) {
+			array = arrayArguments;
+		} else if (arguments != null) {
+			array = arguments.toArray(new String[0]);
+		}
+		try {
+			if (array == null) {
+				database.execSQL(sql);
+			} else {
+				database.execSQL(sql, array);
+			}
+		} catch (RuntimeException e) {
+			throw new QueryException(e);
+		}
+	}
+
 	private void ensureSize(int position)
 	{
 		if (arguments == null) {

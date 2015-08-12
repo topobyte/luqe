@@ -20,6 +20,7 @@ package de.topobyte.luqe.queryabstraction.sqlite.android;
 import android.database.sqlite.SQLiteDatabase;
 import de.topobyte.luqe.queryabstraction.sqlite.iface.IConnection;
 import de.topobyte.luqe.queryabstraction.sqlite.iface.IPreparedStatement;
+import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
 
 public class AndroidConnection implements IConnection
 {
@@ -29,10 +30,17 @@ public class AndroidConnection implements IConnection
 	{
 		this.database = database;
 	}
-	
+
 	@Override
 	public IPreparedStatement prepareStatement(String sql)
 	{
 		return new AndroidPreparedStatement(database, sql);
 	}
+
+	@Override
+	public void execute(String sql) throws QueryException
+	{
+		database.execSQL(sql);
+	}
+
 }
