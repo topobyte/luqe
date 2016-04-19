@@ -1,1 +1,4 @@
-rootProject.name = pName
+include 'core', 'jdbc', 'android'
+project(':core').name = 'luqe-core'
+project(':jdbc').name = 'luqe-jdbc'
+project(':android').name = 'luqe-android'

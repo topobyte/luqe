@@ -80,7 +80,7 @@ public class AndroidPreparedStatement implements IPreparedStatement
 	private void ensureSize(int position)
 	{
 		if (arguments == null) {
-			arguments = new ArrayList<String>();
+			arguments = new ArrayList<>();
 		}
 		while (arguments.size() < position) {
 			arguments.add(null);

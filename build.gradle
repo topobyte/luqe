@@ -2,32 +2,60 @@ task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
 }
 
-apply plugin: 'java'
-apply plugin: 'eclipse'
-apply plugin: 'maven'
-
-group = pGroup
-version = pVersion
-
-repositories {
-    maven {
-        url maven_path_topobyte
-    }
-    mavenCentral()
+allprojects {
+    group = pGroup
+    version = pVersion
 }
 
-dependencies {
-    compile 'com.google.android:android:4.1.1.4'
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'maven'
+    apply plugin: 'eclipse'
 
-    compile "org.slf4j:slf4j-api:1.6.1"
-    runtime "org.slf4j:slf4j-log4j12:1.6.1"
-    runtime "log4j:log4j:1.2.16"
-}
-
-uploadArchives {
     repositories {
-        mavenDeployer {
-	    repository(url: maven_url_topobyte)
+        maven {
+            url maven_path_topobyte
         }
+        mavenCentral()
+    }
+}
+
+subprojects {
+    uploadArchives {
+        repositories {
+            mavenDeployer {
+                repository(url: maven_url_topobyte)
+            }
+        }
+    }
+}
+
+subprojects {
+    def installer = install.repositories.mavenInstaller
+    def deployer = uploadArchives.repositories.mavenDeployer
+
+    [installer, deployer]*.pom*.whenConfigured { pom ->
+        pom.dependencies.removeAll { it.scope == "runtime" }
+    }
+}
+
+project(':luqe-core') {
+    dependencies {
+        compile "org.slf4j:slf4j-api:1.6.1"
+        runtime "org.slf4j:slf4j-log4j12:1.6.1"
+        runtime "log4j:log4j:1.2.16"
+    }
+}
+
+project(':luqe-jdbc') {
+    dependencies {
+        compile project(':luqe-core')
+    }
+}
+
+project(':luqe-android') {
+    dependencies {
+        compile project(':luqe-core')
+        compile 'com.google.android:android:4.1.1.4'
     }
 }
