@@ -44,6 +44,12 @@ public class AndroidResultSet implements IResultSet
 	}
 
 	@Override
+	public long getLong(int position) throws QueryException
+	{
+		return cursor.getLong(position - 1);
+	}
+
+	@Override
 	public double getDouble(int position) throws QueryException
 	{
 		return cursor.getDouble(position - 1);

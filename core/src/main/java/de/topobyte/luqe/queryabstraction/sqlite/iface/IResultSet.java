@@ -24,6 +24,8 @@ public interface IResultSet
 
 	public int getInt(int position) throws QueryException;
 
+	public long getLong(int position) throws QueryException;
+
 	public double getDouble(int position) throws QueryException;
 
 	public String getString(int position) throws QueryException;

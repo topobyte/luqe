@@ -82,6 +82,16 @@ public class JdbcResultSet implements IResultSet
 	}
 
 	@Override
+	public long getLong(int position) throws QueryException
+	{
+		try {
+			return resultSet.getLong(position);
+		} catch (SQLException e) {
+			throw new QueryException(e);
+		}
+	}
+
+	@Override
 	public double getDouble(int position) throws QueryException
 	{
 		try {
