@@ -33,4 +33,5 @@ public interface IPreparedStatement
 	public void setString(int position, String value) throws QueryException;
 
 	public void setArguments(String[] arguments) throws QueryException;
+
 }

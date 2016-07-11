@@ -24,6 +24,7 @@ import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
 
 public class AndroidConnection implements IConnection
 {
+
 	private final SQLiteDatabase database;
 
 	public AndroidConnection(SQLiteDatabase database)

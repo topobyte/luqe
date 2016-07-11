@@ -48,10 +48,10 @@ public class JdbcResultSet implements IResultSet
 				if (type == Types.INTEGER) {
 					int v = resultSet.getInt(i);
 					builder.append(String.format("%s: %d, ", columnName, v));
-				}else if (type == Types.VARCHAR) {
+				} else if (type == Types.VARCHAR) {
 					String v = resultSet.getString(i);
 					builder.append(String.format("%s: %s, ", columnName, v));
-				}else {
+				} else {
 					builder.append(String.format("%s: ?, ", columnName));
 				}
 			}
@@ -60,7 +60,7 @@ public class JdbcResultSet implements IResultSet
 		}
 		return builder.toString();
 	}
-	
+
 	@Override
 	public boolean next() throws QueryException
 	{

@@ -30,6 +30,7 @@ import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
 
 public class JdbcPreparedStatement implements IPreparedStatement
 {
+
 	private static Logger logger = LoggerFactory
 			.getLogger(JdbcPreparedStatement.class);
 
@@ -128,4 +129,5 @@ public class JdbcPreparedStatement implements IPreparedStatement
 			}
 		}
 	}
+
 }

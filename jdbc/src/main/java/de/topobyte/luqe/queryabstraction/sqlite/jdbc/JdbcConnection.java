@@ -30,6 +30,7 @@ import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
 
 public class JdbcConnection implements IConnection
 {
+
 	private static Logger logger = LoggerFactory
 			.getLogger(JdbcConnection.class);
 

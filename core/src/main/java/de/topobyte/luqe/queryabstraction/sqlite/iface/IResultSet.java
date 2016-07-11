@@ -31,6 +31,7 @@ public interface IResultSet
 	public String getString(int position) throws QueryException;
 
 	public boolean getBoolean(int position) throws QueryException;
-	
+
 	public void close() throws QueryException;
+
 }
