@@ -34,4 +34,6 @@ public interface IPreparedStatement
 
 	public void setArguments(String[] arguments) throws QueryException;
 
+	public void close() throws QueryException;
+
 }

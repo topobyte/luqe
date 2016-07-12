@@ -121,4 +121,10 @@ public class AndroidPreparedStatement implements IPreparedStatement
 		this.arrayArguments = arguments;
 	}
 
+	@Override
+	public void close() throws QueryException
+	{
+		// no-op
+	}
+
 }

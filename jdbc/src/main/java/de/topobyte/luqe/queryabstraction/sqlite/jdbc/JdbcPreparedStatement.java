@@ -130,4 +130,14 @@ public class JdbcPreparedStatement implements IPreparedStatement
 		}
 	}
 
+	@Override
+	public void close() throws QueryException
+	{
+		try {
+			statement.close();
+		} catch (SQLException e) {
+			throw new QueryException(e);
+		}
+	}
+
 }
