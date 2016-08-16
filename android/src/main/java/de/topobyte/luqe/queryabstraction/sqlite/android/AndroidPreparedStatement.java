@@ -22,6 +22,7 @@ import java.util.List;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteStatement;
 import de.topobyte.luqe.queryabstraction.sqlite.iface.IPreparedStatement;
 import de.topobyte.luqe.queryabstraction.sqlite.iface.IResultSet;
 import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
@@ -43,38 +44,110 @@ public class AndroidPreparedStatement implements IPreparedStatement
 	@Override
 	public IResultSet executeQuery() throws QueryException
 	{
-		String[] array = null;
-		if (arrayArguments != null) {
-			array = arrayArguments;
-		} else if (arguments != null) {
-			array = arguments.toArray(new String[0]);
-		}
-		try {
-			Cursor cursor = database.rawQuery(sql, array);
-			return new AndroidResultSet(cursor);
-		} catch (RuntimeException e) {
-			throw new QueryException(e);
+		QueryType type = queryType();
+		switch (type) {
+		default:
+		case SELECT:
+		case OTHER:
+			String[] array = null;
+			if (arrayArguments != null) {
+				array = arrayArguments;
+			} else if (arguments != null) {
+				array = arguments.toArray(new String[0]);
+			}
+			try {
+				Cursor cursor = database.rawQuery(sql, array);
+				return new AndroidResultSet(cursor);
+			} catch (RuntimeException e) {
+				throw new QueryException(e);
+			}
+		case INSERT:
+		case UPDATE:
+		case DELETE:
+			SQLiteStatement s = database.compileStatement(sql);
+			for (int i = 0; i < arguments.size(); i++) {
+				String argument = arguments.get(i);
+				if (argument == null) {
+					s.bindNull(i + 1);
+				} else {
+					s.bindString(i + 1, argument);
+				}
+			}
+			if (type == QueryType.INSERT) {
+				long id = s.executeInsert();
+				s.close();
+				return new IdResultSet(id);
+			} else {
+				int nAffected = s.executeUpdateDelete();
+				s.close();
+				return new EmptyResultSet();
+			}
 		}
 	}
 
 	@Override
 	public void execute() throws QueryException
 	{
-		String[] array = null;
-		if (arrayArguments != null) {
-			array = arrayArguments;
-		} else if (arguments != null) {
-			array = arguments.toArray(new String[0]);
-		}
-		try {
-			if (array == null) {
-				database.execSQL(sql);
-			} else {
-				database.execSQL(sql, array);
+		QueryType type = queryType();
+		switch (type) {
+		default:
+		case SELECT:
+		case OTHER:
+			String[] array = null;
+			if (arrayArguments != null) {
+				array = arrayArguments;
+			} else if (arguments != null) {
+				array = arguments.toArray(new String[0]);
 			}
-		} catch (RuntimeException e) {
-			throw new QueryException(e);
+			try {
+				if (array == null) {
+					database.execSQL(sql);
+				} else {
+					database.execSQL(sql, array);
+				}
+			} catch (RuntimeException e) {
+				throw new QueryException(e);
+			}
+			break;
+		case INSERT:
+		case UPDATE:
+		case DELETE:
+			SQLiteStatement s = database.compileStatement(sql);
+			for (int i = 0; i < arguments.size(); i++) {
+				String argument = arguments.get(i);
+				if (argument == null) {
+					s.bindNull(i + 1);
+				} else {
+					s.bindString(i + 1, argument);
+				}
+			}
+			if (type == QueryType.INSERT) {
+				s.executeInsert();
+				s.close();
+			} else {
+				s.executeUpdateDelete();
+				s.close();
+			}
+			break;
 		}
+	}
+
+	private QueryType queryType()
+	{
+		String lower = sql.toLowerCase();
+		if (lower.startsWith("select")) {
+			return QueryType.SELECT;
+		}
+		if (lower.startsWith("insert")) {
+			return QueryType.INSERT;
+		}
+		if (lower.startsWith("update")) {
+			return QueryType.UPDATE;
+		}
+		if (lower.startsWith("delete")) {
+			return QueryType.DELETE;
+		}
+		return QueryType.OTHER;
 	}
 
 	private void ensureSize(int position)
