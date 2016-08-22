@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with luqe. If not, see <http://www.gnu.org/licenses/>.
 
-package de.topobyte.luqe.queryabstraction.sqlite.android;
+package de.topobyte.luqe.android;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,9 +23,9 @@ import java.util.List;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteStatement;
-import de.topobyte.luqe.queryabstraction.sqlite.iface.IPreparedStatement;
-import de.topobyte.luqe.queryabstraction.sqlite.iface.IResultSet;
-import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
+import de.topobyte.luqe.iface.IPreparedStatement;
+import de.topobyte.luqe.iface.IResultSet;
+import de.topobyte.luqe.iface.QueryException;
 
 public class AndroidPreparedStatement implements IPreparedStatement
 {

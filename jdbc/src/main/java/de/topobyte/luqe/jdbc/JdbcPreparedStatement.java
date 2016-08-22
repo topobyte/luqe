@@ -15,7 +15,7 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with luqe. If not, see <http://www.gnu.org/licenses/>.
 
-package de.topobyte.luqe.queryabstraction.sqlite.jdbc;
+package de.topobyte.luqe.jdbc;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -24,9 +24,9 @@ import java.sql.SQLException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.topobyte.luqe.queryabstraction.sqlite.iface.IPreparedStatement;
-import de.topobyte.luqe.queryabstraction.sqlite.iface.IResultSet;
-import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
+import de.topobyte.luqe.iface.IPreparedStatement;
+import de.topobyte.luqe.iface.IResultSet;
+import de.topobyte.luqe.iface.QueryException;
 
 public class JdbcPreparedStatement implements IPreparedStatement
 {

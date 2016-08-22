@@ -15,69 +15,62 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with luqe. If not, see <http://www.gnu.org/licenses/>.
 
-package de.topobyte.luqe.queryabstraction.sqlite.android;
+package de.topobyte.luqe.android;
 
-import de.topobyte.luqe.queryabstraction.sqlite.iface.IResultSet;
-import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
+import android.database.Cursor;
+import de.topobyte.luqe.iface.IResultSet;
+import de.topobyte.luqe.iface.QueryException;
 
-public class IdResultSet implements IResultSet
+public class AndroidResultSet implements IResultSet
 {
 
-	private long id;
-	private boolean next = false;
+	private final Cursor cursor;
 
-	public IdResultSet(long id)
+	public AndroidResultSet(Cursor cursor)
 	{
-		this.id = id;
+		this.cursor = cursor;
 	}
 
 	@Override
-	public boolean next() throws QueryException
+	public boolean next()
 	{
-		if (!next) {
-			next = true;
-			return true;
-		}
-		return false;
+		return cursor.moveToNext();
 	}
 
 	@Override
 	public int getInt(int position) throws QueryException
 	{
-		throw new QueryException();
+		return cursor.getInt(position - 1);
 	}
 
 	@Override
 	public long getLong(int position) throws QueryException
 	{
-		if (position == 1) {
-			return id;
-		}
-		throw new QueryException();
-	}
-
-	@Override
-	public String getString(int position) throws QueryException
-	{
-		throw new QueryException();
+		return cursor.getLong(position - 1);
 	}
 
 	@Override
 	public double getDouble(int position) throws QueryException
 	{
-		throw new QueryException();
+		return cursor.getDouble(position - 1);
+	}
+
+	@Override
+	public String getString(int position) throws QueryException
+	{
+		return cursor.getString(position - 1);
 	}
 
 	@Override
 	public boolean getBoolean(int position) throws QueryException
 	{
-		throw new QueryException();
+		return cursor.getInt(position - 1) != 0;
 	}
 
 	@Override
 	public void close() throws QueryException
 	{
-		// nothing to do here
+		cursor.close();
 	}
 
 }

@@ -15,25 +15,21 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with luqe. If not, see <http://www.gnu.org/licenses/>.
 
-package de.topobyte.luqe.queryabstraction.sqlite.iface;
+package de.topobyte.luqe.iface;
 
-public interface IPreparedStatement
+public class QueryException extends Exception
 {
 
-	public IResultSet executeQuery() throws QueryException;
+	private static final long serialVersionUID = 2399631207695923729L;
 
-	public void execute() throws QueryException;
+	public QueryException()
+	{
+		super();
+	}
 
-	public void setInt(int position, int value) throws QueryException;
-
-	public void setLong(int position, long value) throws QueryException;
-
-	public void setDouble(int position, double value) throws QueryException;
-
-	public void setString(int position, String value) throws QueryException;
-
-	public void setArguments(String[] arguments) throws QueryException;
-
-	public void close() throws QueryException;
+	public QueryException(Exception cause)
+	{
+		super(cause);
+	}
 
 }

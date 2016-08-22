@@ -15,15 +15,15 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with luqe. If not, see <http://www.gnu.org/licenses/>.
 
-package de.topobyte.luqe.queryabstraction.sqlite.jdbc;
+package de.topobyte.luqe.jdbc;
 
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import de.topobyte.luqe.queryabstraction.sqlite.iface.IResultSet;
-import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
+import de.topobyte.luqe.iface.IResultSet;
+import de.topobyte.luqe.iface.QueryException;
 
 public class JdbcResultSet implements IResultSet
 {

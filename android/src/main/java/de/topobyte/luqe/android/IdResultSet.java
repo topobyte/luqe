@@ -15,17 +15,29 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with luqe. If not, see <http://www.gnu.org/licenses/>.
 
-package de.topobyte.luqe.queryabstraction.sqlite.android;
+package de.topobyte.luqe.android;
 
-import de.topobyte.luqe.queryabstraction.sqlite.iface.IResultSet;
-import de.topobyte.luqe.queryabstraction.sqlite.iface.QueryException;
+import de.topobyte.luqe.iface.IResultSet;
+import de.topobyte.luqe.iface.QueryException;
 
-public class EmptyResultSet implements IResultSet
+public class IdResultSet implements IResultSet
 {
+
+	private long id;
+	private boolean next = false;
+
+	public IdResultSet(long id)
+	{
+		this.id = id;
+	}
 
 	@Override
 	public boolean next() throws QueryException
 	{
+		if (!next) {
+			next = true;
+			return true;
+		}
 		return false;
 	}
 
@@ -38,6 +50,9 @@ public class EmptyResultSet implements IResultSet
 	@Override
 	public long getLong(int position) throws QueryException
 	{
+		if (position == 1) {
+			return id;
+		}
 		throw new QueryException();
 	}
 

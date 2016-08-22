@@ -15,14 +15,14 @@
 // You should have received a copy of the GNU Lesser General Public License
 // along with luqe. If not, see <http://www.gnu.org/licenses/>.
 
-package de.topobyte.luqe.queryabstraction.sqlite.iface;
+package de.topobyte.luqe.android;
 
-public interface IConnection
-{
+public enum QueryType {
 
-	public IPreparedStatement prepareStatement(String sql)
-			throws QueryException;
-
-	public void execute(String sql) throws QueryException;
+	SELECT,
+	INSERT,
+	UPDATE,
+	DELETE,
+	OTHER
 
 }
