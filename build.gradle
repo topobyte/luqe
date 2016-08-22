@@ -21,13 +21,6 @@ subprojects {
 }
 
 subprojects {
-    uploadArchives {
-        repositories {
-            mavenDeployer {
-                repository(url: maven_url_topobyte)
-            }
-        }
-    }
     task sourcesJar(type: Jar, dependsOn: classes) {
         classifier = 'sources'
         from sourceSets.main.allSource
@@ -38,12 +31,17 @@ subprojects {
     }
 }
 
-subprojects {
-    def installer = install.repositories.mavenInstaller
-    def deployer = uploadArchives.repositories.mavenDeployer
+if (project.hasProperty("topobyte")) {
+    subprojects {
+        apply from: 'file:///' + System.getProperty("user.home") \
+            + '/.gradle/topobyte.gradle'
 
-    [installer, deployer]*.pom*.whenConfigured { pom ->
-        pom.dependencies.removeAll { it.scope == "runtime" }
+        def installer = install.repositories.mavenInstaller
+        def deployer = uploadArchives.repositories.mavenDeployer
+
+        [installer, deployer]*.pom*.whenConfigured { pom ->
+            pom.dependencies.removeAll { it.scope == "runtime" }
+        }
     }
 }
 
