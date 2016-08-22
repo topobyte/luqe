@@ -78,7 +78,7 @@ public class AndroidPreparedStatement implements IPreparedStatement
 				s.close();
 				return new IdResultSet(id);
 			} else {
-				int nAffected = s.executeUpdateDelete();
+				s.execute();
 				s.close();
 				return new EmptyResultSet();
 			}
