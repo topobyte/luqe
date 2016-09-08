@@ -13,9 +13,6 @@ subprojects {
     apply plugin: 'eclipse'
 
     repositories {
-        maven {
-            url maven_path_topobyte
-        }
         mavenCentral()
     }
 }
