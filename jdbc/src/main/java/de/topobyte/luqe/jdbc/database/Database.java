@@ -40,6 +40,12 @@ public class Database
 		this(url, false);
 	}
 
+	public Database(Connection jdbcConnection)
+	{
+		this.jdbcConnection = jdbcConnection;
+		initConnection();
+	}
+
 	public Database(String url, boolean autoCommit)
 	{
 		logger.debug("configuring database connection");
@@ -50,6 +56,11 @@ public class Database
 			logger.error("unable to create jdbc connection", e);
 			return;
 		}
+		initConnection();
+	}
+
+	private void initConnection()
+	{
 		try {
 			connection = new JdbcConnection(jdbcConnection);
 		} catch (SQLException e) {
