@@ -17,7 +17,7 @@
 
 package de.topobyte.luqe.iface;
 
-public interface IPreparedStatement
+public interface IPreparedStatement extends AutoCloseable
 {
 
 	public IResultSet executeQuery() throws QueryException;
@@ -34,6 +34,7 @@ public interface IPreparedStatement
 
 	public void setArguments(String[] arguments) throws QueryException;
 
+	@Override
 	public void close() throws QueryException;
 
 }
