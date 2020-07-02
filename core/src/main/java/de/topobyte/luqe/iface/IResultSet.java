@@ -17,7 +17,7 @@
 
 package de.topobyte.luqe.iface;
 
-public interface IResultSet
+public interface IResultSet extends AutoCloseable
 {
 
 	public boolean next() throws QueryException;
@@ -32,6 +32,7 @@ public interface IResultSet
 
 	public boolean getBoolean(int position) throws QueryException;
 
+	@Override
 	public void close() throws QueryException;
 
 }
