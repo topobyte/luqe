@@ -72,8 +72,8 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setInt(int position, int value) throws QueryException
 	{
-		logger.debug(String.format("setInt: pos: %d, value: %d", position,
-				value));
+		logger.debug(
+				String.format("setInt: pos: %d, value: %d", position, value));
 		try {
 			statement.setInt(position, value);
 		} catch (SQLException e) {
@@ -84,8 +84,8 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setLong(int position, long value) throws QueryException
 	{
-		logger.debug(String.format("setInt: pos: %d, value: %d", position,
-				value));
+		logger.debug(
+				String.format("setInt: pos: %d, value: %d", position, value));
 		try {
 			statement.setLong(position, value);
 		} catch (SQLException e) {
@@ -112,6 +112,18 @@ public class JdbcPreparedStatement implements IPreparedStatement
 				value));
 		try {
 			statement.setString(position, value);
+		} catch (SQLException e) {
+			throw new QueryException(e);
+		}
+	}
+
+	@Override
+	public void setBlob(int position, byte[] value) throws QueryException
+	{
+		logger.debug(String.format("setBlob: pos: %d, value: %d bytes",
+				position, value.length));
+		try {
+			statement.setBytes(position, value);
 		} catch (SQLException e) {
 			throw new QueryException(e);
 		}

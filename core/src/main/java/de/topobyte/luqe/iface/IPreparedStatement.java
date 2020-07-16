@@ -32,6 +32,8 @@ public interface IPreparedStatement extends AutoCloseable
 
 	public void setString(int position, String value) throws QueryException;
 
+	public void setBlob(int position, byte[] value) throws QueryException;
+
 	public void setArguments(String[] arguments) throws QueryException;
 
 	@Override

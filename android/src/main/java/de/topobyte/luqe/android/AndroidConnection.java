@@ -35,7 +35,42 @@ public class AndroidConnection implements IConnection
 	@Override
 	public IPreparedStatement prepareStatement(String sql)
 	{
-		return new AndroidPreparedStatement(database, sql);
+		/*
+		 * Depending on the query type we use either the fake prepared statement
+		 * or the direct prepared statement. We need the fake prepared statement
+		 * because the native compiled statements on Android cannot return
+		 * result sets larger than 1x1 and are thus unsuitable for most select
+		 * queries.
+		 */
+		QueryType type = queryType(sql);
+		switch (type) {
+		default:
+		case SELECT:
+		case OTHER:
+			return new AndroidFakePreparedStatement(database, sql);
+		case INSERT:
+		case UPDATE:
+		case DELETE:
+			return new AndroidDirectPreparedStatement(database, sql, type);
+		}
+	}
+
+	private QueryType queryType(String sql)
+	{
+		String lower = sql.toLowerCase();
+		if (lower.startsWith("select")) {
+			return QueryType.SELECT;
+		}
+		if (lower.startsWith("insert")) {
+			return QueryType.INSERT;
+		}
+		if (lower.startsWith("update")) {
+			return QueryType.UPDATE;
+		}
+		if (lower.startsWith("delete")) {
+			return QueryType.DELETE;
+		}
+		return QueryType.OTHER;
 	}
 
 	@Override
