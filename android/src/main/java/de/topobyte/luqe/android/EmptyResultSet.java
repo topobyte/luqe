@@ -60,6 +60,12 @@ public class EmptyResultSet implements IResultSet
 	}
 
 	@Override
+	public byte[] getBlob(int position) throws QueryException
+	{
+		throw new QueryException();
+	}
+
+	@Override
 	public void close() throws QueryException
 	{
 		// nothing to do here

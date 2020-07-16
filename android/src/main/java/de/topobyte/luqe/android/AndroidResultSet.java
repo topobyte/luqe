@@ -68,6 +68,12 @@ public class AndroidResultSet implements IResultSet
 	}
 
 	@Override
+	public byte[] getBlob(int position) throws QueryException
+	{
+		return cursor.getBlob(position - 1);
+	}
+
+	@Override
 	public void close() throws QueryException
 	{
 		cursor.close();

@@ -122,6 +122,16 @@ public class JdbcResultSet implements IResultSet
 	}
 
 	@Override
+	public byte[] getBlob(int position) throws QueryException
+	{
+		try {
+			return resultSet.getBytes(position);
+		} catch (SQLException e) {
+			throw new QueryException(e);
+		}
+	}
+
+	@Override
 	public void close() throws QueryException
 	{
 		try {

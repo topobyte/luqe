@@ -30,6 +30,8 @@ public interface IResultSet extends AutoCloseable
 
 	public String getString(int position) throws QueryException;
 
+	public byte[] getBlob(int position) throws QueryException;
+
 	public boolean getBoolean(int position) throws QueryException;
 
 	@Override
