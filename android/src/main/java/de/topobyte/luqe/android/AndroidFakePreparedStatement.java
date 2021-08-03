@@ -123,6 +123,13 @@ public class AndroidFakePreparedStatement implements IPreparedStatement
 	}
 
 	@Override
+	public void setBoolean(int position, boolean value) throws QueryException
+	{
+		ensureSize(position);
+		arguments.set(position - 1, "" + (value ? 1 : 0));
+	}
+
+	@Override
 	public void setArguments(String[] arguments) throws QueryException
 	{
 		this.arrayArguments = arguments;

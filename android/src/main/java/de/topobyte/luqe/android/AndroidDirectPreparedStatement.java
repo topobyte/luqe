@@ -89,6 +89,12 @@ public class AndroidDirectPreparedStatement implements IPreparedStatement
 	}
 
 	@Override
+	public void setBoolean(int position, boolean value) throws QueryException
+	{
+		stmt.bindLong(position, value ? 1 : 0);
+	}
+
+	@Override
 	public void setArguments(String[] arguments) throws QueryException
 	{
 		stmt.bindAllArgsAsStrings(arguments);

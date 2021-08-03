@@ -130,6 +130,18 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	}
 
 	@Override
+	public void setBoolean(int position, boolean value) throws QueryException
+	{
+		logger.debug(String.format("setBoolean: pos: %d, value: %b", position,
+				value));
+		try {
+			statement.setBoolean(position, value);
+		} catch (SQLException e) {
+			throw new QueryException(e);
+		}
+	}
+
+	@Override
 	public void setArguments(String[] arguments) throws QueryException
 	{
 		logger.debug(String.format("setArguments: %d", arguments.length));
