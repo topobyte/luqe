@@ -48,7 +48,9 @@ public class Database
 
 	public Database(String url, boolean autoCommit)
 	{
-		logger.debug("configuring database connection");
+		if (logger.isDebugEnabled()) {
+			logger.debug("configuring database connection");
+		}
 		try {
 			jdbcConnection = DriverManager.getConnection(url);
 			jdbcConnection.setAutoCommit(autoCommit);
@@ -66,7 +68,9 @@ public class Database
 
 	public void closeConnection(boolean commit)
 	{
-		logger.debug("closing database connection");
+		if (logger.isDebugEnabled()) {
+			logger.debug("closing database connection");
+		}
 		try {
 			if (jdbcConnection != null) {
 				if (commit) {

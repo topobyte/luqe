@@ -42,10 +42,11 @@ public class JdbcConnection implements IConnection
 	}
 
 	@Override
-	public IPreparedStatement prepareStatement(String sql)
-			throws QueryException
+	public IPreparedStatement prepareStatement(String sql) throws QueryException
 	{
-		logger.debug("prepareStatment: " + sql);
+		if (logger.isDebugEnabled()) {
+			logger.debug("prepareStatment: " + sql);
+		}
 		try {
 			PreparedStatement statement = connection.prepareStatement(sql);
 			return new JdbcPreparedStatement(statement);

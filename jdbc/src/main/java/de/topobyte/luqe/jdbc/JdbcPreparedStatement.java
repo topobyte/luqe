@@ -45,7 +45,9 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public IResultSet executeQuery() throws QueryException
 	{
-		logger.debug("executeQuery");
+		if (logger.isDebugEnabled()) {
+			logger.debug("executeQuery");
+		}
 		try {
 			boolean hasResultSet = statement.execute();
 			if (hasResultSet) {
@@ -73,7 +75,9 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setNull(int position) throws QueryException
 	{
-		logger.debug(String.format("setNull: pos: %d", position));
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("setNull: pos: %d", position));
+		}
 		try {
 			statement.setNull(position, Types.NULL);
 		} catch (SQLException e) {
@@ -84,8 +88,10 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setInt(int position, int value) throws QueryException
 	{
-		logger.debug(
-				String.format("setInt: pos: %d, value: %d", position, value));
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("setInt: pos: %d, value: %d", position,
+					value));
+		}
 		try {
 			statement.setInt(position, value);
 		} catch (SQLException e) {
@@ -96,8 +102,10 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setLong(int position, long value) throws QueryException
 	{
-		logger.debug(
-				String.format("setInt: pos: %d, value: %d", position, value));
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("setInt: pos: %d, value: %d", position,
+					value));
+		}
 		try {
 			statement.setLong(position, value);
 		} catch (SQLException e) {
@@ -108,8 +116,10 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setDouble(int position, double value) throws QueryException
 	{
-		logger.debug(String.format("setDouble: pos: %d, value: %f", position,
-				value));
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("setDouble: pos: %d, value: %f",
+					position, value));
+		}
 		try {
 			statement.setDouble(position, value);
 		} catch (SQLException e) {
@@ -120,8 +130,10 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setString(int position, String value) throws QueryException
 	{
-		logger.debug(String.format("setString: pos: %d, value: %s", position,
-				value));
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("setString: pos: %d, value: %s",
+					position, value));
+		}
 		try {
 			statement.setString(position, value);
 		} catch (SQLException e) {
@@ -132,8 +144,10 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setBlob(int position, byte[] value) throws QueryException
 	{
-		logger.debug(String.format("setBlob: pos: %d, value: %d bytes",
-				position, value.length));
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("setBlob: pos: %d, value: %d bytes",
+					position, value.length));
+		}
 		try {
 			statement.setBytes(position, value);
 		} catch (SQLException e) {
@@ -144,8 +158,10 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setBoolean(int position, boolean value) throws QueryException
 	{
-		logger.debug(String.format("setBoolean: pos: %d, value: %b", position,
-				value));
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("setBoolean: pos: %d, value: %b",
+					position, value));
+		}
 		try {
 			statement.setBoolean(position, value);
 		} catch (SQLException e) {
@@ -156,7 +172,9 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	@Override
 	public void setArguments(String[] arguments) throws QueryException
 	{
-		logger.debug(String.format("setArguments: %d", arguments.length));
+		if (logger.isDebugEnabled()) {
+			logger.debug(String.format("setArguments: %d", arguments.length));
+		}
 		for (int i = 0; i < arguments.length; i++) {
 			try {
 				statement.setString(i + 1, arguments[i]);
