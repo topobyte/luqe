@@ -59,6 +59,12 @@ public class AndroidDirectPreparedStatement implements IPreparedStatement
 	}
 
 	@Override
+	public void setNull(int position) throws QueryException
+	{
+		stmt.bindNull(position);
+	}
+
+	@Override
 	public void setInt(int position, int value) throws QueryException
 	{
 		stmt.bindLong(position, value);

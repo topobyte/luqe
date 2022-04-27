@@ -24,6 +24,8 @@ public interface IPreparedStatement extends AutoCloseable
 
 	public void execute() throws QueryException;
 
+	public void setNull(int position) throws QueryException;
+
 	public void setInt(int position, int value) throws QueryException;
 
 	public void setLong(int position, long value) throws QueryException;

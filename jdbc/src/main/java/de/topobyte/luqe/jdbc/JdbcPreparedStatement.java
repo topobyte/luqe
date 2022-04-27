@@ -20,6 +20,7 @@ package de.topobyte.luqe.jdbc;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -67,6 +68,17 @@ public class JdbcPreparedStatement implements IPreparedStatement
 	public void execute() throws QueryException
 	{
 		executeQuery();
+	}
+
+	@Override
+	public void setNull(int position) throws QueryException
+	{
+		logger.debug(String.format("setNull: pos: %d", position));
+		try {
+			statement.setNull(position, Types.NULL);
+		} catch (SQLException e) {
+			throw new QueryException(e);
+		}
 	}
 
 	@Override

@@ -88,6 +88,13 @@ public class AndroidFakePreparedStatement implements IPreparedStatement
 	}
 
 	@Override
+	public void setNull(int position) throws QueryException
+	{
+		ensureSize(position);
+		arguments.set(position - 1, null);
+	}
+
+	@Override
 	public void setInt(int position, int value) throws QueryException
 	{
 		ensureSize(position);
