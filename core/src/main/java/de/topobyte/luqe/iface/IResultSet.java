@@ -22,6 +22,8 @@ public interface IResultSet extends AutoCloseable
 
 	public boolean next() throws QueryException;
 
+	public boolean isNull(int position) throws QueryException;
+
 	public int getInt(int position) throws QueryException;
 
 	public long getLong(int position) throws QueryException;

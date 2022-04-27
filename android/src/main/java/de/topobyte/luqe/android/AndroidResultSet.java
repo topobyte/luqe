@@ -38,6 +38,12 @@ public class AndroidResultSet implements IResultSet
 	}
 
 	@Override
+	public boolean isNull(int position) throws QueryException
+	{
+		return cursor.isNull(position - 1);
+	}
+
+	@Override
 	public int getInt(int position) throws QueryException
 	{
 		return cursor.getInt(position - 1);

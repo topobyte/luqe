@@ -42,6 +42,12 @@ public class IdResultSet implements IResultSet
 	}
 
 	@Override
+	public boolean isNull(int position) throws QueryException
+	{
+		throw new QueryException();
+	}
+
+	@Override
 	public int getInt(int position) throws QueryException
 	{
 		throw new QueryException();

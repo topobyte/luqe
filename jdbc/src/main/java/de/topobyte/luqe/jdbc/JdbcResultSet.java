@@ -72,6 +72,17 @@ public class JdbcResultSet implements IResultSet
 	}
 
 	@Override
+	public boolean isNull(int position) throws QueryException
+	{
+		// JDBC doesn't have a generic null check for a column. There is
+		// wasNull() which can be called after retrieving a value using
+		// getInt(), getLong(), etc., however this doesn't make a nice API
+		// and let's hope getting any type as String works on most database
+		// systems.
+		return getString(position) == null;
+	}
+
+	@Override
 	public int getInt(int position) throws QueryException
 	{
 		try {
