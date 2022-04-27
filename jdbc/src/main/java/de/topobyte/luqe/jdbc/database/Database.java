@@ -61,11 +61,7 @@ public class Database
 
 	private void initConnection()
 	{
-		try {
-			connection = new JdbcConnection(jdbcConnection);
-		} catch (SQLException e) {
-			logger.error("unable to create jdbc connection", e);
-		}
+		connection = new JdbcConnection(jdbcConnection);
 	}
 
 	public void closeConnection(boolean commit)

@@ -36,7 +36,7 @@ public class JdbcConnection implements IConnection
 
 	private final Connection connection;
 
-	public JdbcConnection(Connection connection) throws SQLException
+	public JdbcConnection(Connection connection)
 	{
 		this.connection = connection;
 	}
